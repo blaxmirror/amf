@@ -38,7 +38,7 @@ func SendAmfStatusChangeNotify(amfStatus string, guamiList []models.Guami) {
 		amfStatusNotification.AmfStatusInfoList = append(amfStatusNotification.AmfStatusInfoList, amfStatusInfo)
 		uri := subscriptionData.AmfStatusUri
 
-		logger.ProducerLog.Infof("[AMF] Send Amf Status Change Notify to %s", uri)
+		logger.ProducerLog.Infof("[AMF] Send Location Info Notify to %s", uri)
 		httpResponse, err := client.AmfStatusChangeCallbackDocumentApiServiceCallbackDocumentApi.
 			AmfStatusChangeNotify(context.Background(), uri, amfStatusNotification)
 		if err != nil {
@@ -47,8 +47,8 @@ func SendAmfStatusChangeNotify(amfStatus string, guamiList []models.Guami) {
 			} else if err.Error() != httpResponse.Status {
 				HttpLog.Errorln(err.Error())
 			}
-		}else{
-			logger.CommLog.Info("Send Location Info Subscribe success")
+		} else {
+			logger.CommLog.Info("Send Location Info Notify success")
 		}
 		return true
 	})
