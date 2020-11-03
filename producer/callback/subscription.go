@@ -47,6 +47,8 @@ func SendAmfStatusChangeNotify(amfStatus string, guamiList []models.Guami) {
 			} else if err.Error() != httpResponse.Status {
 				HttpLog.Errorln(err.Error())
 			}
+		}else{
+			logger.CommLog.Info("Send Location Info Subscribe success")
 		}
 		return true
 	})
