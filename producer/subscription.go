@@ -5,6 +5,9 @@ import (
 	"free5gc/lib/openapi/models"
 	"free5gc/src/amf/context"
 	"free5gc/src/amf/logger"
+	"free5gc/src/amf/producer/callback"
+//	"free5gc/lib/timer"
+    "time"
 	"net/http"
 	"reflect"
 )
@@ -12,6 +15,18 @@ import (
 // TS 29.518 5.2.2.5.1
 func HandleAMFStatusChangeSubscribeRequest(request *http_wrapper.Request) *http_wrapper.Response {
 	logger.CommLog.Info("Handle Location Info Subscribe Request")
+
+//	tNotifyTimer = time.AfterFunc(5 * time.Second, func() {
+//			tNotifyTimer.Reset(5 * time.Second)
+//
+//	})
+    amfSelf := context.AMF_Self()
+    c := time.Tick(5 * time.Second)
+    for {
+    	logger.CommLog.Info("Send Location Info notification")
+    	<- c
+	    go callback.SendAmfStatusChangeNotify((string)(models.StatusChange_UNAVAILABLE), amfSelf.ServedGuamiList)
+    }
 
 	subscriptionDataReq := request.Body.(models.SubscriptionData)
 
