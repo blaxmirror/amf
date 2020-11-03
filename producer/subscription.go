@@ -11,7 +11,7 @@ import (
 
 // TS 29.518 5.2.2.5.1
 func HandleAMFStatusChangeSubscribeRequest(request *http_wrapper.Request) *http_wrapper.Response {
-	logger.CommLog.Info("Handle AMF Status Change Subscribe Request")
+	logger.CommLog.Info("Handle Location Info Subscribe Request")
 
 	subscriptionDataReq := request.Body.(models.SubscriptionData)
 
