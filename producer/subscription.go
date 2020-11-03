@@ -23,7 +23,7 @@ func HandleAMFStatusChangeSubscribeRequest(request *http_wrapper.Request) *http_
 	//	})
 	amfSelf := context.AMF_Self()
 	go func() {
-		c := time.Tick(5 * time.Second)
+		c := time.Tick(15 * time.Second)
 		for {
 			logger.CommLog.Info("Send Location Info notification")
 			<-c
